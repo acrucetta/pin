@@ -13,6 +13,25 @@ Don't remember the ID? call `pin ls` to show the list of saved commands.
 
 ## Usage
 
+### Building from Source
+
+Clone the repository or download the source code.
+
+```
+git clone acrucetta/pin
+```
+
+Navigate to the source directory.
+
+Compile the code:
+```gcc -o pin main.c```
+
+(Optional) Move the compiled executable to a directory in your PATH for global access:
+bash
+```
+mv pin /usr/local/bin/
+```
+
 ### Getting Started
 
 Run the tool using the command:
