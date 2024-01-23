@@ -5,7 +5,7 @@ Have you ever tried to run a command but forgot where it was in your history? To
 
 Pin allows you to save the most frequently used commands in your command line. 
 
-By calling `"pin add '<your command'"` you can store your most frequently used commands into a simple text file saved in your machine. 
+By calling `pin add '<your command>'` you can store your most frequently used commands into a simple text file saved in your machine. 
 
 To run them simply call `pin run <command id>` and call the command whenever you need it. 
 
