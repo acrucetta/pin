@@ -24,6 +24,7 @@ git clone acrucetta/pin
 Navigate to the source directory.
 
 Compile the code:
+
 ```gcc -o pin main.c```
 
 (Optional) Move the compiled executable to a directory in your PATH for global access:
