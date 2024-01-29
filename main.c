@@ -13,7 +13,7 @@ void run_command(int command_id, char *file_path);
 const char *get_absolute_file_path(char *filename);
 
 #define MAX_COMMANDS 100
-#define MAX_COMMAND_LENGTH 100
+#define MAX_COMMAND_LENGTH 200
 #define CONFIG_DIR "/.config/pin"
 #define CONFIG_FILE "/commands.txt"
 
@@ -114,24 +114,15 @@ int main(int argc, char *argv[]) {
 
 const char *get_absolute_file_path(char *filename) {
   char cwd[1024];
-  char fullpath[1024 + 256];
+  char fullpath[1024 + 512];
 
   if (getcwd(cwd, sizeof(cwd)) != NULL) {
     snprintf(fullpath, sizeof(fullpath), "%s/%s", cwd, filename);
-    printf("%s",fullpath);
     return fullpath;
   } else {
     perror("getcwd() error");
     return "";
   }
-}
-
-// Command Helpers
-
-char *make_file_open_command(char *file_name) {
-  char *abs_filepath = get_absolute_file_path(file_name);
-  printf("Opening file %s\n", abs_filepath);
-  return "abc";
 }
 
 // CLI commands
