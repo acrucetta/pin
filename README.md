@@ -11,6 +11,8 @@ To run them simply call `pin run <command id>` and call the command whenever you
 
 Don't remember the ID? call `pin ls` to show the list of saved commands.
 
+Do you want to pin a file? call `pin add -f <file path>` and the file will be pinned with vim as the default editor.
+
 ## Usage
 
 ### Building from Source
@@ -66,6 +68,19 @@ This initializes the configuration files in your `~/.config/pin` directory.
   ```
   $ pin add "git status"
   Successfully added command git status
+  ```
+
+### Adding a File
+- To add a file:
+  ```
+  pin add -f <file path>
+  ```
+  Replace `<file path>` with the path to the file you want to store.
+
+  **Example:**
+  ```
+  $ pin add -f /home/user/Documents/notes.txt
+  Successfully added file /home/user/Documents/notes.txt
   ```
 
 ### Removing a Command
