@@ -117,7 +117,7 @@ const char *get_absolute_file_path(char *filename) {
   char fullpath[1024 + 512];
 
   if (getcwd(cwd, sizeof(cwd)) != NULL) {
-    snprintf(fullpath, sizeof(fullpath), "%s/%s", cwd, filename);
+    snprintf(fullpath, sizeof(fullpath), "'%s/%s'", cwd, filename);
     return fullpath;
   } else {
     perror("getcwd() error");
