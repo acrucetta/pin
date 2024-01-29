@@ -16,6 +16,7 @@ const char *get_absolute_file_path(char *filename);
 #define MAX_COMMAND_LENGTH 200
 #define CONFIG_DIR "/.config/pin"
 #define CONFIG_FILE "/commands.txt"
+#define EDITOR "vim"
 
 // Main loop
 
@@ -84,7 +85,7 @@ int main(int argc, char *argv[]) {
       char * abs_filepath = get_absolute_file_path(argv[3]);
       // Add command with relative path
       char open_command[1024];
-      snprintf(open_command, sizeof(open_command), "hx %s", abs_filepath);
+      snprintf(open_command, sizeof(open_command), "%s %s", EDITOR, abs_filepath);
       add_command(open_command, config_filepath);
     } else {
       add_command(argv[2], config_filepath);
