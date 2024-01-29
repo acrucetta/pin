@@ -75,7 +75,6 @@ int main(int argc, char *argv[]) {
   if (strcmp(argv[1], "ls") == 0) {
     list_commands(config_filepath);
   } else if (strcmp(argv[1], "add") == 0) {
-    printf("%s, %s, %s", argv[0],argv[1],argv[2]);
     if (argc < 3) {
       printf("Usage: pin add <command>\n");
       printf("    To pin files add a -f <filename>\n");
