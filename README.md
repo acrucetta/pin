@@ -1,11 +1,39 @@
 
-# Pin
+# pin - tag your most used commands
+
+Have you ever tried to run a command but forgot where it was in your history? Too tired to search? 
 
 Pin allows you to save the most frequently used commands in your command line. 
 
-Assume you use an EXPORT command to set env variables often in your shell. Pin allows you to call "pin list" to show a list of your pinned commands and selecting it to execute it from the list.
+By calling `pin add '<your command>'` you can store your most frequently used commands into a simple text file saved in your machine. 
+
+To run them simply call `pin run <command id>` and call the command whenever you need it. 
+
+Don't remember the ID? call `pin ls` to show the list of saved commands.
 
 ## Usage
+
+### Building from Source
+
+Clone the repository or download the source code.
+
+```
+git clone acrucetta/pin
+```
+
+Navigate to the source directory.
+
+Compile the code:
+
+```
+gcc -o pin main.c
+```
+
+(Optional) Move the compiled executable to a directory in your PATH for global access:
+bash
+```
+mv pin /usr/local/bin/
+```
 
 ### Getting Started
 
