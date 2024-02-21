@@ -13,7 +13,7 @@ void run_command(int command_id, char *file_path);
 const char *get_absolute_file_path(char *filename);
 
 #define MAX_COMMANDS 100
-#define MAX_COMMAND_LENGTH 200
+#define MAX_COMMAND_LENGTH 500
 #define CONFIG_DIR "/.config/pin"
 #define CONFIG_FILE "/commands.txt"
 #define EDITOR "vim"
@@ -82,10 +82,11 @@ int main(int argc, char *argv[]) {
       return 1;
     }
     if (strcmp(argv[2], "-f") == 0) {
-      char * abs_filepath = get_absolute_file_path(argv[3]);
+      char *abs_filepath = get_absolute_file_path(argv[3]);
       // Add command with relative path
       char open_command[1024];
-      snprintf(open_command, sizeof(open_command), "%s %s", EDITOR, abs_filepath);
+      snprintf(open_command, sizeof(open_command), "%s %s", EDITOR,
+               abs_filepath);
       add_command(open_command, config_filepath);
     } else {
       add_command(argv[2], config_filepath);
