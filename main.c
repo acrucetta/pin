@@ -1,4 +1,5 @@
 #include <pwd.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,7 +7,7 @@
 #include <unistd.h>
 
 // Function prototypes
-void list_commands(char *file_path);
+void list_commands(char *file_path, bool is_detailed);
 void add_command(char *command, char *file_path);
 void remove_command(int commandId, char *file_path);
 void run_command(int command_id, char *file_path);
@@ -66,6 +67,7 @@ int main(int argc, char *argv[]) {
     printf("Usage: pin <command>\n");
     printf("Commands:\n");
     printf("  ls: List commands\n");
+    printf("        -d - if printing a detailed list\n");
     printf("  add: Add command\n");
     printf("        -f - if pinning a file\n");
     printf("  rm: Remove command\n");
@@ -74,7 +76,11 @@ int main(int argc, char *argv[]) {
   }
 
   if (strcmp(argv[1], "ls") == 0) {
-    list_commands(config_filepath);
+    bool is_detailed = false;
+    if (argc > 2) {
+      is_detailed = strcmp(argv[2], "-d") == 0;
+    }
+    list_commands(config_filepath, is_detailed);
   } else if (strcmp(argv[1], "add") == 0) {
     if (argc < 3) {
       printf("Usage: pin add <command>\n");
@@ -127,6 +133,11 @@ const char *get_absolute_file_path(char *filename) {
   }
 }
 
+char *get_last_token(char *line, char delim) {
+  char *last_token = strrchr(line, delim);
+  return last_token ? last_token + 1 : (char *)line;
+}
+
 // CLI commands
 
 void run_command(int command_id, char *file_path) {
@@ -148,7 +159,7 @@ void run_command(int command_id, char *file_path) {
   }
 }
 
-void list_commands(char *file_path) {
+void list_commands(char *file_path, bool is_detailed) {
   FILE *fp = fopen(file_path, "r");
   if (fp == NULL) {
     printf("Error opening file\n");
@@ -158,7 +169,27 @@ void list_commands(char *file_path) {
   char line[MAX_COMMAND_LENGTH];
   int i = 0;
   while (fgets(line, sizeof(line), fp) != NULL) {
-    printf("%d: %s", i, line);
+
+    // Remove newline char
+    int line_len = strlen(line);
+    if (line_len > 0 && line[line_len - 1] == '\n') {
+      line[line_len - 1] = '\0';
+    }
+
+    if (is_detailed) {
+      printf("%d: %s\n", i, line);
+    } else { // short version
+      // I want to split the line by "/" and get the last
+      // object, first remove that "'" at the end
+      char *file_name = get_last_token(line, '/');
+      if (file_name != NULL) {
+        int len = strlen(file_name);
+        if (len > 0 && file_name[len - 1] == '\'') {
+          file_name[len - 1] = '\0';
+        }
+        printf("%d: %s\n", i, file_name);
+      }
+    }
     i++;
   }
 }
