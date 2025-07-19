@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(otool:*)",
+      "Bash(gcc:*)",
+      "Bash(clang:*)",
+      "Bash(sudo cp:*)",
+      "Bash(pin ls)"
+    ],
+    "deny": []
+  }
+}
